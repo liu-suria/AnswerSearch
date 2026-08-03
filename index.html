@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="description" content="纯静态 Excel 题库检索系统" />
+  <title>题库检索系统</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div>
+        <h1>题库检索系统</h1>
+        <p>上传 Excel 后，可按题干、答案、选项或解析模糊检索</p>
+      </div>
+      <button id="clearBtn" class="button ghost hidden" type="button">清空题库</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="uploadPanel" class="panel upload-panel">
+      <div id="dropZone" class="drop-zone" tabindex="0" role="button" aria-label="上传 Excel 题库">
+        <input id="fileInput" type="file" accept=".xlsx,.xls,.csv" hidden />
+        <div class="upload-icon">⇧</div>
+        <h2>上传题库 Excel</h2>
+        <p>点击选择文件，或将文件拖到这里</p>
+        <span>支持 .xlsx、.xls、.csv；数据只在当前浏览器中处理</span>
+      </div>
+
+      <div class="template-note">
+        <strong>推荐表头：</strong>
+        类型、题干、选项A、选项B、选项C、选项D、答案、解析
+        <a href="题库导入模板.csv" download>下载题库模板</a>
+      </div>
+      <div id="loadError" class="message error hidden"></div>
+    </section>
+
+    <section id="searchPanel" class="panel search-panel hidden">
+      <div class="search-row">
+        <div class="search-box">
+          <span class="search-icon">⌕</span>
+          <input id="searchInput" type="search" placeholder="输入题干、答案、选项或解析关键词" autocomplete="off" />
+          <button id="resetSearchBtn" class="input-clear hidden" type="button" aria-label="清除搜索">×</button>
+        </div>
+        <select id="typeFilter" aria-label="题型筛选">
+          <option value="all">全部题型</option>
+          <option value="choice">选择题</option>
+          <option value="qa">问答题</option>
+        </select>
+      </div>
+      <div class="summary-row">
+        <div id="fileSummary" class="file-summary"></div>
+        <div id="resultSummary" class="result-summary"></div>
+      </div>
+    </section>
+
+    <section id="emptyState" class="empty-state hidden">
+      <div class="empty-icon">⌕</div>
+      <h2>输入关键词开始检索</h2>
+      <p>系统只展示命中的题目，不会显示未命中的内容。</p>
+    </section>
+
+    <section id="noResult" class="empty-state hidden">
+      <div class="empty-icon">∅</div>
+      <h2>没有找到匹配题目</h2>
+      <p>可以更换关键词，或切换题型后再试。</p>
+    </section>
+
+    <section id="results" class="results" aria-live="polite"></section>
+  </main>
+
+  <footer>纯静态运行 · Excel 在浏览器本地解析 · 适合部署到 EdgeOne Pages</footer>
+  <script>window.XLSX_LOAD_FAILED = false;</script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" onerror="window.XLSX_LOAD_FAILED=true"></script>
+  <script src="app.js"></script>
+</body>
+</html>
