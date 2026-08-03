@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#2563eb" />
-  <meta name="description" content="支持任意 Excel、知识库、多题库缓存和拼音搜索的纯静态检索系统" />
+  <meta name="description" content="支持任意 Excel、知识库、多题库缓存和拼音搜索的纯前端本地检索系统" />
   <title>AnswerSearch 题库与知识库检索</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
@@ -28,7 +28,7 @@
         <div class="upload-icon">⇧</div>
         <h2>添加一个或多个 Excel / CSV</h2>
         <p>题库、两列问答表、知识库或普通数据表都可以直接上传</p>
-        <span>系统会自动识别表头、读取全部工作表，并在当前浏览器本地缓存</span>
+        <span>纯前端本地解析，文件默认不上传服务器</span>
       </div>
       <div class="template-note">
         <strong>无需固定格式：</strong>支持单列、两列、标准题库和任意多列表；所有非空字段均可检索
@@ -78,12 +78,15 @@
 
     <section id="firstUse" class="panel first-use">
       <div class="first-icon">📚</div><h2>还没有资料库</h2>
-      <p>上传任意 Excel 或 CSV，系统会智能解析并保存到当前浏览器。</p>
+      <p>上传任意 Excel 或 CSV，系统会在浏览器本地智能解析并保存。</p>
       <button id="firstAddBtn" class="button primary" type="button">上传文件</button>
     </section>
   </main>
 
-  <footer>让散落在表格里的知识，随搜随得。</footer>
+  <footer>
+    <div>纯前端架构 · 本地解析 · 数据默认不离开你的设备</div>
+    <div><a href="https://github.com/liu-suria/AnswerSearch" target="_blank" rel="noopener noreferrer">GitHub 开源项目 · 欢迎 Star</a></div>
+  </footer>
   <script>window.XLSX_LOAD_FAILED=false;window.PINYIN_LOAD_FAILED=false;</script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" onerror="window.XLSX_LOAD_FAILED=true"></script>
   <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.js" onerror="window.PINYIN_LOAD_FAILED=true"></script>
